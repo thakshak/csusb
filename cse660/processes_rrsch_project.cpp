@@ -15,13 +15,12 @@ int DAEMONScnt=6;
 class Memory
 {
 private:
-	int current_index,max_pages;
+	int max_pages;
 	vector<int> pages;//Each element of the vector represents a 1024 byte page of memory.
 	//The vector will store 0's and 1's where a 0 indicates a free page and a 1 indicates the page is in use. 
 public:
 	Memory(int max_pages)
 	{
-		this->current_index=0;
 		this->max_pages=max_pages;
 		for(int i=0;i<max_pages;i++)
 		{
@@ -30,12 +29,23 @@ public:
 	}
 	int load(int limit)
 	{
-		if(current_index+limit<=max_pages)
+		int prev=0,current_index=-1;
+		for(int i=0;i<max_pages;i++)
+		{
+			if(i-prev>=limit)
+			{
+				current_index=prev;
+				break;
+			}
+			if(pages[i]!=0) prev=i;
+		}
+		if(current_index!=-1)
 		{
 			for(int i=0;i<limit;i++)
 			{
-				pages[++current_index]=1;
+				pages[current_index++]=1;
 			}
+			return prev;
 		}
 		return current_index;
 	}
@@ -185,12 +195,18 @@ public:
 	};
 	int getnextpid() { return ++nextpid; }
 
-	Process add_process(Process newProcess)
+	int add_process(Process newProcess)
 	{
 		int s=newProcess.get_memory_size();
-		newProcess.set_memory_address(m.load(s/1024+1));
+		int allocated=m.load(s/1024+1);
+		if(allocated==-1)
+		{
+			cout<<"insufficient memory for the new process"<<endl;
+			return 1; 
+		}
+		newProcess.set_memory_address(allocated);
 		this->processes.push_back(newProcess);
-		return(newProcess);
+		return 0;
 	};
 	int remove_process(int pid)
 	{
@@ -362,7 +378,7 @@ int main()
 				cin >> pid;
 			}while(pid<1001);
 			t.remove_process(pid);
-			cout<<"daemons"<<DAEMONS<<endl;
+			//cout<<"daemons"<<DAEMONS<<endl;
 		}
 		else if (choice==4)
 		{
@@ -370,6 +386,4 @@ int main()
 		}
 		
 	}while (choice != 5);
-
 }
-
