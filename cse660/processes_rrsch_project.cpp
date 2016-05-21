@@ -1,6 +1,5 @@
 //lab-6 processes in round robin scheduling - memory handling added
 //author: thakshak gudimetla
-//id: 005647976
 #include <iostream>
 #include <ctime>
 #include <vector>
