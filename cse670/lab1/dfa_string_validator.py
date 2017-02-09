@@ -49,16 +49,16 @@ With thanks to: Kerstin Voigt
 
 '''
 DFA:
-		a b
-	  0 1 0
-	  1 1 2
-	  2 1 3
-	  3 1 0
+	     a b
+	  0  1 0
+	  1  1 2
+	  2  1 3
+	  3  1 0
 
 Description of Input File(file1.dfa):
 
 1st line states in dfa - 0 1 2 3
-2nd line alphabets in language - a b
+2nd line alphabets_in_language - a b
 3rd line initial_state - 0
 4th line final_state - 3
 followed by (number_of_states) lines with transitions.
