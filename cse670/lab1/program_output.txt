@@ -1,0 +1,13 @@
+Test1:
+
+C:\Users\gthak\Downloads>python dfa_accepting_string.py
+
+enter string : ababbabaaa
+String Rejected
+
+Test2:
+
+C:\Users\gthak\Downloads>python dfa_accepting_string.py
+
+enter string : ababbabaaabb
+String Accepted
