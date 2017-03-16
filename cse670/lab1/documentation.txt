@@ -20,7 +20,7 @@ a b
 
 0
 
-4th line -> final_state
+4th line -> final_states or accepting states
 
 3
 
