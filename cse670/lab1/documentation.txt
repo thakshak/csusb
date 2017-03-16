@@ -24,7 +24,7 @@ a b
 
 3
 
-followed by n(number_of_states) lines with transitions
+followed by n(number_of_states) lines with transitions from each state
 
 1 0
 1 2
